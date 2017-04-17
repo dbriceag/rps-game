@@ -39,7 +39,7 @@ public class GameMediumTest {
 	@Test
 	public void computerPlayerVsCircularProbabilisticHumanPlayerLength5() {
 		Game game = new Game(new ComputerPlayer(), new CircularProbabilisticHumanPlayer(5, 0.2f));
-		int firstPlayerWin = play(game, 3000);
+		int firstPlayerWin = play(game, 4000);
 		assertThat(firstPlayerWin>1000, is(true));		
 	}
 	
@@ -82,8 +82,8 @@ public class GameMediumTest {
 		do {
 			System.out.println("------------ Round " + (rounds - i) + " -----------");
 			firstPlayerWin += game.playOneRound();
-			System.out.println("player1 played: " + game.getPlayer1LastChoice1());
-			System.out.println("player2 played: " + game.getPlayer2LastChoice2());
+			System.out.println("player1 played: " + game.getPlayer1LastChoice());
+			System.out.println("player2 played: " + game.getPlayer2LastChoice());
 			System.out.println("player1 totalwin: " + firstPlayerWin);
 			System.out.println("");
 		} while(i-- > 0);

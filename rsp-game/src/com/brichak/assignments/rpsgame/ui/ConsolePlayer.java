@@ -7,7 +7,7 @@ import java.util.Scanner;
 import com.brichak.assignments.rpsgame.core.Choice;
 import com.brichak.assignments.rpsgame.core.Player;
 
-public class ConsolePlayer implements Player {
+class ConsolePlayer implements Player {
 
 	private Map<String, Choice> validOptions = new HashMap<>();
 

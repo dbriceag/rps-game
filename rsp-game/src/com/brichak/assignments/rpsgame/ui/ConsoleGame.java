@@ -17,8 +17,8 @@ public class ConsoleGame {
 		do {
 			System.out.println("------------ Round " + round + " -----------");
 			consolePlayerWin += game.playOneRound();
-			System.out.println("Human played: " + game.getPlayer1LastChoice1());
-			System.out.println("Computer played: " + game.getPlayer2LastChoice2());
+			System.out.println("Human played: " + game.getPlayer1LastChoice());
+			System.out.println("Computer played: " + game.getPlayer2LastChoice());
 			System.out.println("Human total win: " + consolePlayerWin);
 			System.out.println("");
 			round++;

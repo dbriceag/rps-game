@@ -1,63 +1,11 @@
 package com.brichak.assignments.rpsgame.core;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 
-class Pattern {
-
-	private List<Byte> list;
-	private int fromIncluding;
-	private int toExcluding;
-
-	public Pattern(List<Byte> list, int fromIncluding, int toExcluding) {
-		this.list = list;
-		this.fromIncluding = fromIncluding;
-		this.toExcluding = toExcluding;
-	}
-
-	private List<Byte> getValues() {
-		return list.subList(fromIncluding, toExcluding);
-	}
-
-	public byte getPrediction() {
-		return list.get(toExcluding - 1); 
-	}
-
-	public Pattern getPatternMask() {
-		return new Pattern(list, fromIncluding, toExcluding - 1);
-	}
-	
-	@Override
-	public int hashCode() {
-		return getValues().stream().mapToInt(a -> a).reduce(1, (a, b) -> a*b);
-	}
-
-	@Override
-	public boolean equals(Object obj) {
-		if (this == obj)
-			return true;
-		if (obj == null)
-			return false;
-		if (getClass() != obj.getClass())
-			return false;
-		Pattern other = (Pattern) obj;
-		if (getValues() == null) {
-			if (other.getValues() != null)
-				return false;
-		} else if (!Arrays.equals(getValues().toArray(),other.getValues().toArray()))
-			return false;
-		return true;
-	}
-	
-	@Override
-	public String toString(){
-		return Arrays.deepToString(getValues().toArray());
-	}
-}
 
 public class ComputerPlayer implements Player {
 	private static final int MAX_PATTERN_LENGTH=7;
@@ -79,14 +27,14 @@ public class ComputerPlayer implements Player {
 						.max((p1,p2) -> 
 							Integer.compare(patternToFrequencyMap.get(p1), patternToFrequencyMap.get(p1)))
 						.get();
-			result = converByteToChoice(resultPattern.getPrediction());
+			result = decodeChoice(resultPattern.getPrediction());
 		}
 		return result.getWinnerOfMe();
 	}
 	
 	@Override
 	public void setOpponentLastChoice(Choice choice) {
-		opponentHistory.add(converChoiceToByte(choice));
+		opponentHistory.add(encodeChoice(choice));
 		if(opponentHistory.size() >= MAX_PATTERN_LENGTH){
 			addLastPattern();
 		}
@@ -120,15 +68,11 @@ public class ComputerPlayer implements Player {
 		}
 	}
 	
-	public List<Byte> getPatternMask(List<Byte> pattern) {
-		return pattern.subList(pattern.size() - MAX_PATTERN_LENGTH, pattern.size() - 1);
-	}
-	
-	private byte converChoiceToByte(Choice choice) {
+	private byte encodeChoice(Choice choice) {
 		return (byte) choice.ordinal();
 	}
 	
-	private Choice converByteToChoice(byte encodedChoice) {
+	private Choice decodeChoice(byte encodedChoice) {
 		return Choice.values()[encodedChoice];
 	}
 }
