@@ -1,7 +1,8 @@
 package com.brichak.assignments.rpsgame.core;
 
-import static org.hamcrest.MatcherAssert.assertThat;
-import static org.hamcrest.core.Is.is;
+import static org.hamcrest.Matchers.*;
+import static org.hamcrest.MatcherAssert.*;
+
 import org.junit.Test;
 
 import com.brichak.assignments.rpsgame.core.ComputerPlayer;
@@ -19,28 +20,28 @@ public class GameMediumTest {
 	public void computerPlayerVsConstantHumanPlayer() {
 		Game game = new Game(new ComputerPlayer(), new ConstantHumanPlayer());
 		int firstPlayerWin = play(game, 5000);
-		assertThat(firstPlayerWin>5000 - 7*2, is(true));		
+		assertThat(firstPlayerWin, greaterThan(5000 - 7*2));		
 	}
 	
 	@Test
 	public void computerPlayerVsCircularDeterministicHumanPlayerLength5() {
 		Game game = new Game(new ComputerPlayer(), new CircularDeterministicHumanPlayer(5));
 		int firstPlayerWin = play(game, 5000);
-		assertThat(firstPlayerWin>4000, is(true));		
+		assertThat(firstPlayerWin, greaterThan(4000));		
 	}
 	
 	@Test
 	public void computerPlayerVsCircularDeterministicHumanPlayerLength10() {
 		Game game = new Game(new ComputerPlayer(), new CircularDeterministicHumanPlayer(10));
 		int firstPlayerWin = play(game, 5000);
-		assertThat(firstPlayerWin>3000, is(true));		
+		assertThat(firstPlayerWin, greaterThan(3000));		
 	}
 	
 	@Test
 	public void computerPlayerVsCircularProbabilisticHumanPlayerLength5() {
 		Game game = new Game(new ComputerPlayer(), new CircularProbabilisticHumanPlayer(5, 0.2f));
 		int firstPlayerWin = play(game, 4000);
-		assertThat(firstPlayerWin>1000, is(true));		
+		assertThat(firstPlayerWin, greaterThan(1000));		
 	}
 	
 	@Test
@@ -52,7 +53,7 @@ public class GameMediumTest {
 						));
 				
 		int firstPlayerWin = play(game, 5000);
-		assertThat(firstPlayerWin>4000, is(true));		
+		assertThat(firstPlayerWin, greaterThan(4000));		
 	}
 	
 	@Test
@@ -64,7 +65,7 @@ public class GameMediumTest {
 						));
 				
 		int firstPlayerWin = play(game, 5000);
-		assertThat(firstPlayerWin>1000, is(true));		
+		assertThat(firstPlayerWin, greaterThan(1000));		
 	}
 	
 	@Test
@@ -73,7 +74,7 @@ public class GameMediumTest {
 				new HumanIntuitivePlayer());
 				
 		int firstPlayerWin = play(game, 5000);
-		assertThat(firstPlayerWin>1000, is(true));		
+		assertThat(firstPlayerWin, greaterThan(1000));		
 	}
 	
 	private int play(Game game, int rounds) {
