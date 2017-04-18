@@ -1,7 +1,7 @@
 !.gitignore
 /apache-tomcat-6.0.28/
-#.classpath
-#.project
+.classpath
+.project
 .settings/
 .springBeans
 target
