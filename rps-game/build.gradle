@@ -1,0 +1,15 @@
+apply plugin: 'java'
+apply plugin: 'application'
+
+apply plugin: 'eclipse'
+
+mainClassName = "com.brichak.assignments.rpsgame.ui.ConsoleGame"
+
+dependencies {
+    testCompile 'junit:junit:4.12'
+    testCompile 'org.hamcrest:hamcrest-library:1.3'
+}
+
+repositories {
+    mavenCentral()
+}
